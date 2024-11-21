@@ -6,6 +6,7 @@ import com.cpifppiramide.animalitos.context.MongoDBConnection;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class AnimalitosRepositoryMongoDB implements AnimalitosRepository {
@@ -15,15 +16,16 @@ public class AnimalitosRepositoryMongoDB implements AnimalitosRepository {
         document.append("nombre", animalito.getNombre());
         MongoCollection<Document> collection = MongoDBConnection.getDatabase().getCollection("animalitos");
         collection.insertOne(document);
-        return null;
+        return animalito;
     }
 
     @Override
     public List<Animalito> getAll() {
         MongoCollection<Document> collection = MongoDBConnection.getDatabase().getCollection("animalitos");
+        List<Animalito> animalitos = new ArrayList<>();
         for (Document document : collection.find()) {
-            System.out.println(document.toJson());
+            animalitos.add(new Animalito(document.getString("nombre")));
         }
-        return List.of();
+        return animalitos;
     }
 }

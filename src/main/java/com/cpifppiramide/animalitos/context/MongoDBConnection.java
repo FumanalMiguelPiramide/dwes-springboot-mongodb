@@ -11,7 +11,7 @@ public class MongoDBConnection {
     private final MongoDatabase database;
 
     private MongoDBConnection(){
-        this.mongoClient = MongoClients.create("mongodb://admin:admin123@localhost:27017");
+        this.mongoClient = MongoClients.create("mongodb://root:rootpass@localhost:27017");
         this.database = mongoClient.getDatabase("animalitos-app");
     }
 

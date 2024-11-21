@@ -5,6 +5,7 @@ import com.cpifppiramide.animalitos.animalito.domain.Animalito;
 import com.cpifppiramide.animalitos.animalito.domain.AnimalitosRepository;
 import com.cpifppiramide.animalitos.animalito.infrastructure.AnimalitosRepositoryMongoDB;
 import com.cpifppiramide.animalitos.context.MongoDBConnection;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -25,7 +26,7 @@ class AnimalitosApplicationTests {
 
 	@BeforeAll()
 	public static void clean(){
-		//MongoDBConnection.getDatabase().getCollection("animalitos").drop();
+		MongoDBConnection.getDatabase().getCollection("animalitos").drop();
 	}
 
 	@Test
@@ -37,6 +38,7 @@ class AnimalitosApplicationTests {
 
 	@Test
 	public void list(){
+		animalitosUseCases.save(new Animalito("kike"));
 		List<Animalito> animalitos = animalitosUseCases.getAll();
 		assertEquals(1, animalitos.size());
 	}
