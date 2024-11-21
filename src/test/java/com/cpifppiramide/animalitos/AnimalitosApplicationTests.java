@@ -7,6 +7,7 @@ import com.cpifppiramide.animalitos.animalito.infrastructure.AnimalitosRepositor
 import com.cpifppiramide.animalitos.context.MongoDBConnection;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -24,8 +25,8 @@ class AnimalitosApplicationTests {
 	void contextLoads() {
 	}
 
-	@BeforeAll()
-	public static void clean(){
+	@BeforeEach()
+	public void clean(){
 		MongoDBConnection.getDatabase().getCollection("animalitos").drop();
 	}
 
